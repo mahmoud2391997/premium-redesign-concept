@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="An interactive concept for a premium website redesign.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Premium Redesign Concept</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single 1120px reading column of chapters; each chapter pairs a short claim with a working demo of it. */
+:root{
+  --paper:#EEF0EC;      /* mineral stone, slightly green */
+  --surface:#F8F9F6;
+  --ink:#15191A;
+  --ink-soft:#4B5552;
+  --line:#D3D8D2;
+  --oxide:#2F5D57;      /* primary accent: deep oxide teal */
+  --brass:#A9824A;      /* secondary accent, used sparingly */
+  --on-oxide:#F3F5F1;
+  --shadow:0 1px 2px rgba(21,25,26,.05),0 12px 32px -12px rgba(21,25,26,.18);
+  --f-display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --f-body:"Hanken Grotesk",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --s1:4px;--s2:8px;--s3:16px;--s4:24px;--s5:40px;--s6:64px;--s7:104px;
+  --r:6px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#111514;--surface:#181D1C;--ink:#E7EBE6;--ink-soft:#A3ADA9;--line:#2A3230;
+  --oxide:#7FB3A9;--brass:#CFA86C;--on-oxide:#0E1312;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px -16px rgba(0,0,0,.6);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#111514;--surface:#181D1C;--ink:#E7EBE6;--ink-soft:#A3ADA9;--line:#2A3230;
+  --oxide:#7FB3A9;--brass:#CFA86C;--on-oxide:#0E1312;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px -16px rgba(0,0,0,.6);color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;text-wrap:balance;margin:0;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--oxide);outline-offset:3px;border-radius:2px}
+.label{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.lede{color:var(--ink-soft);max-width:60ch}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);padding-block:14px}
+.top nav{display:flex;gap:var(--s4);flex-wrap:wrap}
+.top nav a{font-size:14px;text-decoration:none;color:var(--ink-soft);position:relative}
+.top nav a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.top nav a:hover{color:var(--ink)}.top nav a:hover::after{transform:scaleX(1)}
+.mark{font-family:var(--f-display);font-size:19px}
+@media (max-width:640px){.top nav{display:none}}
+
+/* hero */
+.hero{padding-block:var(--s7) var(--s6)}
+.hero h1{font-size:clamp(42px,7vw,88px);line-height:1.02;max-width:14ch;margin-block:var(--s4)}
+.hero h1 em{color:var(--oxide)}
+.hero .lede{font-size:19px}
+.hero-row{display:flex;gap:var(--s3);flex-wrap:wrap;margin-top:var(--s5)}
+
+.btn{display:inline-flex;align-items:center;gap:10px;font:500 15px/1 var(--f-body);padding:15px 22px;border-radius:var(--r);border:1px solid transparent;cursor:pointer;text-decoration:none;transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
+.btn .arr{transition:transform .35s var(--ease)}
+.btn:hover .arr{transform:translateX(4px)}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{background:var(--oxide);color:var(--on-oxide)}
+.btn-ghost{border-color:var(--line);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--ink)}
+
+section.ch{padding-block:var(--s7);border-top:1px solid var(--line)}
+.ch-head{display:grid;grid-template-columns:200px 1fr;gap:var(--s4);margin-bottom:var(--s5)}
+.ch-head h2{font-size:clamp(30px,4.2vw,48px);line-height:1.08}
+.ch-head .lede{margin-top:var(--s3)}
+@media (max-width:760px){.ch-head{grid-template-columns:1fr;gap:var(--s2)}}
+
+/* ---------- before / after ---------- */
+.ba{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);aspect-ratio:16/8.5;max-width:100%;--pos:50%;user-select:none}
+.ba-pane{position:absolute;inset:0;display:flex;flex-direction:column}
+.ba-after{clip-path:inset(0 0 0 var(--pos))}
+.ba-handle{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;background:#fff;transform:translateX(-1px);pointer-events:none;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+.ba-handle::after{content:"⟷";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:#fff;color:#15191A;display:grid;place-items:center;font-size:16px;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.ba-tag{position:absolute;top:12px;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:3px;background:rgba(0,0,0,.6);color:#fff;pointer-events:none}
+.ba-tag.l{left:12px}.ba-tag.r{right:12px}
+
+/* "before": deliberately dated */
+.old{background:#ffffff;color:#222;font-family:"Times New Roman",Times,serif;font-size:clamp(9px,1.4vw,15px)}
+.old .o-nav{background:linear-gradient(#3a6db5,#1f4a8a);color:#fff;display:flex;gap:1.4em;padding:.6em 1em;font-family:Arial,sans-serif;font-weight:bold;font-size:.9em}
+.old .o-nav span:first-child{margin-right:auto;font-size:1.2em}
+.old .o-body{display:flex;gap:1em;padding:1em;flex:1;min-height:0}
+.old .o-main{flex:2;border:1px solid #999;padding:.8em;min-width:0}
+.old h3{font-family:Arial,sans-serif;color:#c0392b;font-size:1.7em;font-weight:bold;margin-bottom:.3em}
+.old .o-img{height:38%;background:repeating-linear-gradient(45deg,#ddd 0 8px,#eee 8px 16px);border:2px solid #666;margin:.5em 0}
+.old .o-btn{display:inline-block;background:linear-gradient(#ffb347,#ff7b00);border:1px solid #b35900;color:#fff;font-family:Arial;font-weight:bold;padding:.35em .9em;border-radius:12px;margin-top:.4em}
+.old .o-side{flex:1;background:#f2f2f2;border:1px dashed #aaa;padding:.6em;font-size:.85em;min-width:0}
+.old .o-side a{color:#0000ee;display:block;margin:.25em 0}
+
+/* "after": refined */
+.new{background:var(--surface);color:var(--ink);font-size:clamp(9px,1.4vw,15px)}
+.new .n-nav{display:flex;align-items:center;gap:2em;padding:1.4em 2.2em;font-size:.85em;color:var(--ink-soft)}
+.new .n-nav b{font-family:var(--f-display);font-weight:400;font-size:1.5em;color:var(--ink);margin-right:auto}
+.new .n-body{display:grid;grid-template-columns:1.05fr 1fr;gap:2.4em;padding:1.2em 2.2em 2.2em;flex:1;min-height:0;align-items:center}
+.new h3{font-size:3.1em;line-height:1.02}
+.new p{color:var(--ink-soft);margin-top:.9em;max-width:32ch}
+.new .n-cta{display:inline-block;margin-top:1.4em;background:var(--ink);color:var(--paper);padding:.8em 1.3em;border-radius:4px;font-size:.85em}
+.new .n-img{height:100%;border-radius:4px}
+
+/* generated "premium imagery" placeholders: light falling across stone */
+.img-a{background:
+  radial-gradient(120% 90% at 78% 12%,rgba(255,244,222,.75),transparent 55%),
+  linear-gradient(160deg,#9DB3AC 0%,#5E7C76 45%,#2C4642 100%)}
+.img-b{background:
+  radial-gradient(90% 70% at 20% 0%,rgba(255,238,210,.6),transparent 60%),
+  linear-gradient(200deg,#C9B79A 0%,#8E7A5D 55%,#4C4032 100%)}
+.img-c{background:
+  radial-gradient(100% 80% at 60% 100%,rgba(230,240,236,.45),transparent 60%),
+  linear-gradient(180deg,#3E4A49 0%,#232B2A 100%)}
+
+/* ---------- responsive mock ---------- */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;margin-bottom:var(--s4);background:var(--surface)}
+.seg button{font:500 13px/1 var(--f-body);border:0;background:transparent;color:var(--ink-soft);padding:9px 16px;border-radius:999px;cursor:pointer;transition:background .25s var(--ease),color .25s var(--ease)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.stage{background:repeating-linear-gradient(90deg,transparent 0 23px,var(--line) 23px 24px);border-radius:10px;padding:var(--s4) 0;display:flex;justify-content:center;overflow:hidden}
+.device{width:100%;max-width:1040px;transition:max-width .7s var(--ease);background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden;container-type:inline-size}
+.device[data-w="tablet"]{max-width:768px}
+.device[data-w="mobile"]{max-width:375px}
+.chrome{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.chrome i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.chrome span{margin-left:10px;font-family:var(--f-mono);font-size:11px;color:var(--ink-soft)}
+
+.m-nav{display:flex;align-items:center;gap:28px;padding:22px 36px;font-size:14px;color:var(--ink-soft)}
+.m-nav b{font-family:var(--f-display);font-weight:400;font-size:22px;color:var(--ink);margin-right:auto}
+.m-burger{display:none;width:22px;height:10px;border-block:1.5px solid var(--ink)}
+.m-hero{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:24px 36px 56px;align-items:end}
+.m-hero h3{font-size:56px;line-height:1.02}
+.m-hero p{color:var(--ink-soft);margin-top:18px;font-size:16px;max-width:38ch}
+.m-hero .btn{margin-top:28px}
+.m-hero .ph{aspect-ratio:4/5;border-radius:4px;max-width:100%}
+.m-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0 36px 48px}
+.m-card{display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit}
+.m-card .ph{aspect-ratio:3/2;border-radius:4px;transition:transform .6s var(--ease);max-width:100%}
+.m-card .ph-wrap{overflow:hidden;border-radius:4px}
+.m-card:hover .ph{transform:scale(1.04)}
+.m-card h4{margin:0;font:500 17px/1.3 var(--f-body)}
+.m-card small{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.m-foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:20px 36px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-soft)}
+@container (max-width:900px){
+  .m-hero h3{font-size:44px}
+  .m-grid{grid-template-columns:repeat(2,1fr)}
+  .m-grid .m-card:nth-child(3){display:none}
+}
+@container (max-width:560px){
+  .m-nav{padding:18px 20px}.m-nav span{display:none}.m-burger{display:block}
+  .m-hero{grid-template-columns:1fr;gap:24px;padding:8px 20px 36px}
+  .m-hero .ph{order:-1;aspect-ratio:4/3}
+  .m-hero h3{font-size:36px}
+  .m-grid{grid-template-columns:1fr;padding:0 20px 32px}
+  .m-grid .m-card:nth-child(3){display:flex}
+  .m-foot{padding:18px 20px}
+}
+.bp-note{display:flex;gap:var(--s4);flex-wrap:wrap;margin-top:var(--s4);font-size:14px;color:var(--ink-soft)}
+.bp-note b{font-family:var(--f-mono);font-weight:500;color:var(--ink);font-size:12px;letter-spacing:.06em}
+
+/* ---------- system ---------- */
+.sys{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--s4)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:var(--s4);min-width:0}
+.panel h3{font-family:var(--f-body);font-weight:600;font-size:15px;margin-bottom:var(--s3)}
+.p-colour{grid-column:span 7}.p-type{grid-column:span 5}.p-space{grid-column:span 5}.p-comp{grid-column:span 7}
+@media (max-width:900px){.p-colour,.p-type,.p-space,.p-comp{grid-column:1/-1}}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:var(--s3)}
+.sw{display:flex;flex-direction:column;gap:6px;font-size:13px;background:none;border:0;padding:0;text-align:left;color:inherit;cursor:pointer;font-family:inherit}
+.sw .chip{height:64px;border-radius:6px;border:1px solid var(--line);transition:transform .3s var(--ease)}
+.sw:hover .chip{transform:translateY(-2px)}
+.sw code{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft)}
+.sw .use{font-size:12px;color:var(--ink-soft);line-height:1.4}
+.copied{font-family:var(--f-mono);font-size:12px;color:var(--oxide);min-height:18px;margin-top:var(--s3)}
+.ts{display:flex;flex-direction:column;gap:14px}
+.ts div{display:flex;align-items:baseline;gap:var(--s3);border-bottom:1px solid var(--line);padding-bottom:10px;min-width:0}
+.ts div:last-child{border:0}
+.ts code{font-family:var(--f-mono);font-size:11px;color:var(--ink-soft);flex:0 0 92px}
+.ts .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.space-row{display:flex;align-items:center;gap:var(--s3);font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);margin-bottom:10px}
+.space-row span:first-child{flex:0 0 44px}
+.space-row i{display:block;height:12px;background:var(--oxide);border-radius:2px;opacity:.85}
+.comp-grid{display:flex;flex-direction:column;gap:var(--s4)}
+.comp-row{display:flex;gap:var(--s3);flex-wrap:wrap;align-items:center}
+.field{display:flex;flex-direction:column;gap:6px;flex:1 1 220px;min-width:0}
+.field label{font-size:13px;color:var(--ink-soft)}
+.field input{font:16px var(--f-body);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;transition:border-color .25s var(--ease),box-shadow .25s var(--ease)}
+.field input:focus{outline:none;border-color:var(--oxide);box-shadow:0 0 0 3px color-mix(in srgb,var(--oxide) 22%,transparent)}
+.pill{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px;border:1px solid var(--line);color:var(--ink-soft)}
+.pill.accent{border-color:var(--brass);color:var(--brass)}
+.link-u{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .4s var(--ease);font-weight:500}
+.link-u:hover{background-size:100% 1px}
+
+/* ---------- process ---------- */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s4);counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{border-top:2px solid var(--ink);padding-top:var(--s3);display:flex;flex-direction:column;gap:8px;min-width:0}
+.steps li::before{counter-increment:s;content:"Stage " counter(s);font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.steps h3{font-family:var(--f-body);font-weight:600;font-size:17px}
+.steps p{font-size:15px;color:var(--ink-soft)}
+.steps .wk{font-family:var(--f-mono);font-size:12px;color:var(--oxide);margin-top:auto}
+@media (max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+.deliv{display:grid;grid-template-columns:1fr 1fr;gap:var(--s5);margin-top:var(--s6)}
+@media (max-width:760px){.deliv{grid-template-columns:1fr}}
+.tree{font-family:var(--f-mono);font-size:13px;line-height:1.9;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:var(--s4);overflow-x:auto;white-space:pre;color:var(--ink-soft)}
+.tree b{color:var(--ink);font-weight:500}
+.checks{list-style:none;padding:0;margin:var(--s3) 0 0;display:flex;flex-direction:column;gap:12px}
+.checks li{display:flex;gap:12px;align-items:baseline}
+.checks li::before{content:"";flex:0 0 7px;height:7px;border-radius:50%;background:var(--brass);transform:translateY(-2px)}
+
+.close{padding-block:var(--s7);border-top:1px solid var(--line)}
+.close h2{font-size:clamp(34px,5vw,60px);line-height:1.05;max-width:18ch}
+.close .lede{margin-top:var(--s3)}
+.need{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);margin-top:var(--s5)}
+.need div{border-left:1px solid var(--line);padding-left:var(--s3);min-width:0}
+.need b{display:block;font-weight:600;margin-bottom:4px}
+.need span{font-size:15px;color:var(--ink-soft)}
+@media (max-width:760px){.need{grid-template-columns:1fr}}
+footer{padding-block:var(--s5);border-top:1px solid var(--line);font-size:13px;color:var(--ink-soft)}
+
+/* entrance: content is visible at rest; this only adds a gentle rise */
+@keyframes rise{from{transform:translateY(14px)}to{transform:none}}
+.hero > *{animation:rise .9s var(--ease) both}
+.hero > *:nth-child(2){animation-delay:.08s}.hero > *:nth-child(3){animation-delay:.16s}.hero > *:nth-child(4){animation-delay:.24s}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="mark">Redesign Concept</span>
+    <nav aria-label="Sections">
+      <a href="#transform">Transformation</a>
+      <a href="#responsive">Responsive</a>
+      <a href="#system">Design system</a>
+      <a href="#process">Process</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <span class="label">Concept proposal · Premium website redesign</span>
+    <h1>Same structure. <em>An entirely</em> new standard.</h1>
+    <p class="lede">This page is the concept you asked to see. It shows how I would take a dated site and rebuild every page around refined type, a restrained palette, generous spacing and quiet motion. Your page structure stays as it is. Drag, resize and hover the demos below to see the approach working.</p>
+    <div class="hero-row">
+      <a class="btn btn-primary" href="#transform">See the transformation <span class="arr">→</span></a>
+      <a class="btn btn-ghost" href="#system">View the design system</a>
+    </div>
+  </div>
+
+  <!-- 1. Before / after -->
+  <section class="ch" id="transform">
+    <div class="wrap">
+      <div class="ch-head">
+        <span class="label">The transformation</span>
+        <div>
+          <h2>Elevate the experience, keep everything that works</h2>
+          <p class="lede">The same homepage, the same content and the same layout logic. The change is in the decisions: one type family pairing, one accent, a clear grid and space around everything that matters. Drag the handle to compare.</p>
+        </div>
+      </div>
+
+      <div class="ba" id="ba">
+        <div class="ba-pane old" aria-hidden="true">
+          <div class="o-nav"><span>NORTHVALE STUDIO</span><span>HOME</span><span>ABOUT US</span><span>SERVICES</span><span>CONTACT</span></div>
+          <div class="o-body">
+            <div class="o-main">
+              <h3>Welcome To Our Website!!</h3>
+              <div>We are a leading provider of architecture and interior design solutions. Click below to learn more about our services and products.</div>
+              <div class="o-img"></div>
+              <span class="o-btn">CLICK HERE &gt;&gt;</span>
+            </div>
+            <div class="o-side"><b>Quick Links</b><a>» Our Projects</a><a>» News &amp; Events</a><a>» Testimonials</a><a>» Download Brochure</a></div>
+          </div>
+        </div>
+        <div class="ba-pane new ba-after" aria-hidden="true">
+          <div class="n-nav"><b>Northvale</b><span>Studio</span><span>Projects</span><span>Journal</span><span>Contact</span></div>
+          <div class="n-body">
+            <div>
+              <h3>Spaces shaped by light and restraint.</h3>
+              <p>Architecture and interiors for homes and hospitality, designed to age well.</p>
+              <span class="n-cta">Explore projects →</span>
+            </div>
+            <div class="n-img img-a"></div>
+          </div>
+        </div>
+        <div class="ba-handle"></div>
+        <span class="ba-tag l">Current</span><span class="ba-tag r">Redesign</span>
+        <input type="range" id="ba-range" min="0" max="100" value="50" aria-label="Compare current design and redesign">
+      </div>
+      <p class="label" style="margin-top:14px">Northvale is a demo brand for this concept. Your copy and retained imagery drop into the same system.</p>
+    </div>
+  </section>
+
+  <!-- 2. Responsive -->
+  <section class="ch" id="responsive">
+    <div class="wrap">
+      <div class="ch-head">
+        <span class="label">Responsive</span>
+        <div>
+          <h2>Designed at every width, not shrunk to fit</h2>
+          <p class="lede">Each page gets its own desktop, tablet and mobile layout. Imagery re-crops, navigation collapses and the type scale steps down so the hierarchy holds on a phone. Switch devices to watch the same page reflow.</p>
+        </div>
+      </div>
+
+      <div class="seg" role="group" aria-label="Preview width">
+        <button type="button" id="w-desktop" data-w="desktop" aria-pressed="true">Desktop</button>
+        <button type="button" id="w-tablet" data-w="tablet" aria-pressed="false">Tablet</button>
+        <button type="button" id="w-mobile" data-w="mobile" aria-pressed="false">Mobile</button>
+      </div>
+
+      <div class="stage">
+        <div class="device" id="device" data-w="desktop">
+          <div class="chrome"><i></i><i></i><i></i><span id="dev-label">northvale.studio · 1440</span></div>
+          <div class="m-nav"><b>Northvale</b><span>Studio</span><span>Projects</span><span>Journal</span><span>Contact</span><i class="m-burger" aria-hidden="true"></i></div>
+          <div class="m-hero">
+            <div>
+              <span class="label">Architecture &amp; interiors</span>
+              <h3 style="margin-top:14px">Spaces shaped by light and restraint.</h3>
+              <p>We design homes and hospitality spaces with natural materials, careful proportion and nothing that will date.</p>
+              <a class="btn btn-primary" href="#responsive">Explore projects <span class="arr">→</span></a>
+            </div>
+            <div class="ph img-a"></div>
+          </div>
+          <div class="m-grid">
+            <a class="m-card" href="#responsive"><div class="ph-wrap"><div class="ph img-b"></div></div><small>Residential · 2026</small><h4>Hillside House, Lisbon</h4></a>
+            <a class="m-card" href="#responsive"><div class="ph-wrap"><div class="ph img-c"></div></div><small>Hospitality · 2025</small><h4>The Quarry Hotel</h4></a>
+            <a class="m-card" href="#responsive"><div class="ph-wrap"><div class="ph img-a"></div></div><small>Interiors · 2025</small><h4>Atelier Apartments</h4></a>
+          </div>
+          <div class="m-foot"><span>© Northvale Studio</span><span>Studio · Projects · Journal · Contact</span></div>
+        </div>
+      </div>
+      <div class="bp-note">
+        <span><b>DESKTOP 1440</b> 12-col grid, 80px margins</span>
+        <span><b>TABLET 768</b> 8-col grid, 40px margins</span>
+        <span><b>MOBILE 375</b> 4-col grid, 20px margins</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. System -->
+  <section class="ch" id="system">
+    <div class="wrap">
+      <div class="ch-head">
+        <span class="label">Handover preview</span>
+        <div>
+          <h2>A system your team can keep consistent</h2>
+          <p class="lede">The handover guide documents every token below, and each one maps to a named style or component in Figma. The palette and fonts adapt to your brand. Click a swatch to copy its value.</p>
+        </div>
+      </div>
+
+      <div class="sys">
+        <div class="panel p-colour">
+          <h3>Colour</h3>
+          <div class="swatches" id="swatches"></div>
+          <div class="copied" id="copied" aria-live="polite"></div>
+        </div>
+        <div class="panel p-type">
+          <h3>Type scale · 1.25 ratio</h3>
+          <div class="ts">
+            <div><code>Display 64</code><span class="t" style="font-family:var(--f-display);font-size:40px;line-height:1">Aa Display</span></div>
+            <div><code>H2 40</code><span class="t" style="font-family:var(--f-display);font-size:30px;line-height:1.1">Section heading</span></div>
+            <div><code>H3 24</code><span class="t" style="font-size:22px;font-weight:600">Card title</span></div>
+            <div><code>Body 17</code><span class="t">Running text, 1.6 line height</span></div>
+            <div><code>Label 12</code><span class="t label">Mono label · caps</span></div>
+          </div>
+        </div>
+        <div class="panel p-space">
+          <h3>Spacing · 8px base</h3>
+          <div id="space"></div>
+        </div>
+        <div class="panel p-comp">
+          <h3>Components &amp; micro-interactions</h3>
+          <div class="comp-grid">
+            <div class="comp-row">
+              <a class="btn btn-primary" href="#system">Primary action <span class="arr">→</span></a>
+              <a class="btn btn-ghost" href="#system">Secondary</a>
+              <a class="link-u" href="#system">Text link</a>
+            </div>
+            <div class="comp-row">
+              <div class="field"><label for="demo-email">Email address</label><input id="demo-email" type="email" placeholder="you@company.com"></div>
+            </div>
+            <div class="comp-row">
+              <span class="pill">Residential</span><span class="pill">Hospitality</span><span class="pill accent">Featured</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Process -->
+  <section class="ch" id="process">
+    <div class="wrap">
+      <div class="ch-head">
+        <span class="label">Process</span>
+        <div>
+          <h2>From audit to handover in six weeks</h2>
+          <p class="lede">You see direction before any page is designed, so feedback lands early when it is cheap to act on. Timing depends on page count and is confirmed after the audit.</p>
+        </div>
+      </div>
+      <ol class="steps">
+        <li><h3>Audit</h3><p>Review every current page, the content, the assets to retain and what users struggle with.</p><span class="wk">Week 1</span></li>
+        <li><h3>Direction</h3><p>Two visual directions shown on your homepage. You choose one, or a blend.</p><span class="wk">Week 1–2</span></li>
+        <li><h3>System</h3><p>Colour, type, spacing, grid and the core component library, built in Figma.</p><span class="wk">Week 2–3</span></li>
+        <li><h3>Pages</h3><p>Every page at desktop, tablet and mobile, with interaction notes and prototype links.</p><span class="wk">Week 3–5</span></li>
+        <li><h3>Handover</h3><p>A clean file, the written guide and a walkthrough call with your developer.</p><span class="wk">Week 6</span></li>
+      </ol>
+
+      <div class="deliv">
+        <div>
+          <span class="label">What you receive</span>
+          <ul class="checks">
+            <li>Full redesign of every existing page in the new premium style</li>
+            <li>Desktop (1440), tablet (768) and mobile (375) layouts for each page</li>
+            <li>An organised Figma file with labelled components, variants and auto layout</li>
+            <li>A concise handover guide covering fonts, colours, spacing rules and UI elements</li>
+            <li>Clickable prototype with hover, focus and transition specs</li>
+          </ul>
+        </div>
+        <div>
+          <span class="label">Figma file structure</span>
+          <div class="tree" style="margin-top:16px"><b>📁 Northvale — Website Redesign</b>
+├─ <b>00 Cover &amp; Changelog</b>
+├─ <b>01 Foundations</b>   colour · type · grid · spacing
+├─ <b>02 Components</b>    buttons · inputs · cards · nav
+├─ <b>03 Pages / Desktop</b>
+├─ <b>04 Pages / Tablet</b>
+├─ <b>05 Pages / Mobile</b>
+├─ <b>06 Prototype</b>     flows · interactions
+└─ <b>07 Handover</b>      specs · assets export</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="wrap">
+      <span class="label">Next step</span>
+      <h2 style="margin-top:16px">Send the links and I will apply this to your actual homepage.</h2>
+      <p class="lede">With your URLs, brand copy and the assets you want to keep, I will turn this concept into a first direction on your real content within a few days.</p>
+      <div class="need">
+        <div><b>Current website URLs</b><span>So I can audit every page and map the structure.</span></div>
+        <div><b>Brand copy &amp; messaging</b><span>Tone guides, taglines, any approved wording.</span></div>
+        <div><b>Assets to retain</b><span>Logo files, photography and anything else that must stay.</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Concept prepared November 2026. Northvale Studio is a demonstration brand and not a real client.</div></footer>
+
+<script>
+(function(){
+  // before/after
+  var ba=document.getElementById('ba'),r=document.getElementById('ba-range');
+  r.addEventListener('input',function(){ba.style.setProperty('--pos',r.value+'%')});
+
+  // device widths
+  var dev=document.getElementById('device'),lab=document.getElementById('dev-label');
+  var names={desktop:'1440',tablet:'768',mobile:'375'};
+  document.querySelectorAll('.seg button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.seg button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+      dev.dataset.w=b.dataset.w;lab.textContent='northvale.studio · '+names[b.dataset.w];
+    });
+  });
+
+  // swatches from live tokens
+  var tokens=[['--ink','Ink','Text, primary buttons'],['--paper','Stone','Page background'],['--surface','Surface','Cards, panels'],['--oxide','Oxide','Accent, focus, links'],['--brass','Brass','Highlights, sparingly'],['--line','Hairline','Borders, dividers']];
+  var wrap=document.getElementById('swatches'),out=document.getElementById('copied');
+  function render(){
+    var cs=getComputedStyle(document.documentElement);wrap.innerHTML='';
+    tokens.forEach(function(t){
+      var v=cs.getPropertyValue(t[0]).trim();
+      var b=document.createElement('button');b.type='button';b.className='sw';
+      b.innerHTML='<span class="chip" style="background:'+v+'"></span><strong>'+t[1]+'</strong><code>'+v+'</code><span class="use">'+t[2]+'</span>';
+      b.addEventListener('click',function(){
+        var done=function(){out.textContent='Copied '+t[1]+' '+v};
+        try{navigator.clipboard.writeText(v).then(done,function(){out.textContent=t[1]+': '+v})}catch(e){out.textContent=t[1]+': '+v}
+      });
+      wrap.appendChild(b);
+    });
+  }
+  render();
+  try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',render)}catch(e){}
+  new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+  // spacing scale
+  var sp=document.getElementById('space');
+  [['s1',4],['s2',8],['s3',16],['s4',24],['s5',40],['s6',64],['s7',104]].forEach(function(s){
+    var row=document.createElement('div');row.className='space-row';
+    row.innerHTML='<span>'+s[0]+'</span><i style="width:'+Math.min(s[1]*2,100)+'%"></i><span>'+s[1]+'px</span>';
+    sp.appendChild(row);
+  });
+})();
+</script>
+</body>
+</html>
