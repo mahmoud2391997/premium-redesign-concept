@@ -87,7 +87,7 @@ section.ch{padding-block:var(--s7);border-top:1px solid var(--line)}
 .ba-handle{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;background:#fff;transform:translateX(-1px);pointer-events:none;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
 .ba-handle::after{content:"⟷";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:#fff;color:#15191A;display:grid;place-items:center;font-size:16px;box-shadow:0 4px 14px rgba(0,0,0,.25)}
 .ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
-.ba-tag{position:absolute;top:12px;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:3px;background:rgba(0,0,0,.6);color:#fff;pointer-events:none}
+.ba-tag{position:absolute;bottom:12px;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:3px;background:rgba(0,0,0,.6);color:#fff;pointer-events:none}
 .ba-tag.l{left:12px}.ba-tag.r{right:12px}
 
 /* "before": deliberately dated */
@@ -106,11 +106,11 @@ section.ch{padding-block:var(--s7);border-top:1px solid var(--line)}
 .new{background:var(--surface);color:var(--ink);font-size:clamp(9px,1.4vw,15px)}
 .new .n-nav{display:flex;align-items:center;gap:2em;padding:1.4em 2.2em;font-size:.85em;color:var(--ink-soft)}
 .new .n-nav b{font-family:var(--f-display);font-weight:400;font-size:1.5em;color:var(--ink);margin-right:auto}
-.new .n-body{display:grid;grid-template-columns:1.05fr 1fr;gap:2.4em;padding:1.2em 2.2em 2.2em;flex:1;min-height:0;align-items:center}
+.new .n-body{display:grid;grid-template-columns:1fr 1.05fr;gap:2.4em;padding:1.2em 2.2em 2.2em;flex:1;min-height:0;align-items:center}
 .new h3{font-size:3.1em;line-height:1.02}
 .new p{color:var(--ink-soft);margin-top:.9em;max-width:32ch}
 .new .n-cta{display:inline-block;margin-top:1.4em;background:var(--ink);color:var(--paper);padding:.8em 1.3em;border-radius:4px;font-size:.85em}
-.new .n-img{height:100%;border-radius:4px}
+.new .n-img{height:100%;border-radius:4px;order:-1}
 
 /* generated "premium imagery" placeholders: light falling across stone */
 .img-a{background:
